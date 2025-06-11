@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "478330768262",
+    "project_id": "suraksha-100-f498d",
+    "storage_bucket": "suraksha-100-f498d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478330768262:android:91d6a46e205190cb6bba07",
+        "android_client_info": {
+          "package_name": "com.govt.suraksha_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxGNqQeG0Zb27YMOcl5F01_0yxtg6S1sU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
