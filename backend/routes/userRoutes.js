@@ -16,4 +16,7 @@ userRouter.get("/view",(req,res)=>{
 userRouter.get("/volunteers",(req,res)=>{
     res.render("addvolunteers.ejs")
 })
+userRouter.get("/history",(req,res)=>{
+    res.render("history_and_analysis.ejs")
+})
 module.exports=userRouter;
