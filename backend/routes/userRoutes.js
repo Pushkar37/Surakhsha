@@ -12,13 +12,14 @@ userRouter.get("/register",(req,res)=>{
 userRouter.get("/login",(req,res)=>{
     res.render("login.ejs")
 })
-userRouter.get("/view",ViewController)
+//userRouter.get("/view",ViewController)
+
 userRouter.get("/volunteers",(req,res)=>{
     res.render("addvolunteers.ejs")
 })
 userRouter.get("/history",(req,res)=>{
     res.render("history_and_analysis.ejs")
 })
- userRouter.post("/login-user",loginController)
+//  userRouter.post("/login-user",loginController)
 
 module.exports=userRouter;

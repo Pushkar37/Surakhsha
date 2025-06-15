@@ -8,7 +8,7 @@ const socketio=require('socket.io');
 const path=require('path')
 const cookie=require('cookie-parser');
 
-const port= process.env.Port || 1000;
+const port= process.env.Port || 8080;
 const app= express();
 const server=http.createServer(app);
 dotenv.config();

@@ -6,6 +6,7 @@ const ViewController=(req,res)=>{
         if(!token){
             alert("UNAUTHORIZED");
             res.redirect("https://localhost:1000/user/login")
+            next();
         }
         const DecodeToken=jwt.verify(token,JWT_SECRETURI);
         if(DecodeToken){
@@ -14,6 +15,7 @@ const ViewController=(req,res)=>{
         else{
              alert("UNAUTHORIZED");
             res.redirect("https://localhost:1000/user/login")
+            next();
         }
     } catch (error) {
         console.log(error);
