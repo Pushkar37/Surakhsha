@@ -4,18 +4,18 @@ const ViewController=(req,res)=>{
     try {
         const{token}=req.cookies;
         if(!token){
-            alert("UNAUTHORIZED");
-            res.redirect("https://localhost:1000/user/login")
-            next();
+         
+            res.redirect("http://localhost:1000/user/login")
+         
         }
-        const DecodeToken=jwt.verify(token,JWT_SECRETURI);
+        const DecodeToken=jwt.verify(token,"pushkaristhebest");
         if(DecodeToken){
            res.render("homepage.ejs");
         }
         else{
-             alert("UNAUTHORIZED");
-            res.redirect("https://localhost:1000/user/login")
-            next();
+             
+            res.redirect("http://localhost:1000/user/login")
+           
         }
     } catch (error) {
         console.log(error);

@@ -1,24 +1,39 @@
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
-const loginController=(req,res)=>{
+const Admin = require("../config/database");
+const db = require("../config/database");
+const {  collection,addDoc ,getDocs } =require( 'firebase/firestore/lite');
+const adminModel = require("../models/model");
+const loginController=async(req,res)=>{
+      res.clearCookie('token');
       try {
-        const{userId,password}=req.body;
-        if(!userId||!password){
-            alert("Missing details")
-            res.redirect("https://localhost:1000/user/login")
+        const{email,password}=req.body;
+        if(!email||!password){
+           
+            res.redirect("http://localhost:1000/user/login")
         }
-        //check for correct username and password  ---> hashpassword to be fetched from the database
-        const check=bcrypt.compare(password,hashpassword);
+        // check for correct username and password  ---> hashpassword to be fetched from the database
+         let admin= await adminModel.findOne({email:email});
+      
+            
+       
+          console.log(admin);
+        
+        if(admin==null){
+         res.redirect("http://localhost:1000/user/login")
+        }else{
+        
+        const check=bcrypt.compare(password,admin.password);
         if(!check){
-            alert("Invalid information");
-            res.redirect("https://localhost:1000/user/login")
+            
+            res.redirect("http://localhost:1000/user/login")
         }
        const token=jwt.sign({
-        userId:userId
-       },JWT_SECERTURI); //JWT_SECERETURI NOT YET CREATED
+        userId:admin.id
+       },"pushkaristhebest"); //JWT_SECERETURI NOT YET CREATED
        res.cookie('token',token);
-       res.redirect("https://localhost:1000/user/view");
-    } catch (error) {
+       res.redirect("http://localhost:1000/user/view");
+    }} catch (error) {
         console.log(error)
         res.json({
             success:false,
