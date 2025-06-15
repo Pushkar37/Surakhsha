@@ -6,7 +6,7 @@ const userRouter=require("./routes/userRoutes")
 const http=require('http')
 const socketio=require('socket.io');
 const path=require('path')
-
+const cookie=require('cookie-parser');
 
 const port= process.env.Port || 1000;
 const app= express();
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static('public'));
-
+app.use(cookie);
 //websocket used for establishing connection
 // const io=new socketio(server);
 //  io.on("connection",function (socket){
