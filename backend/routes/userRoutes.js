@@ -22,10 +22,13 @@ userRouter.get("/volunteers",(req,res)=>{
 userRouter.get("/history",(req,res)=>{
     res.render("history_and_analysis.ejs")
 })
-userRouter.get("/register",(req,res)=>{
-    res.render("register.ejs")
-})
-userRouter.post("/createpassword",createpassword)
- userRouter.post("/login-user",loginController)
+
+userRouter.post("/login-user",loginController)
+//the below 2 routes were just for creating encrypted password in the database , unimportant routes 
+
+// userRouter.get("/register",(req,res)=>{
+//     res.render("register.ejs")
+// })
+// userRouter.post("/createpassword",createpassword)
 
 module.exports=userRouter;

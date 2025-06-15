@@ -2,7 +2,7 @@ const bcrypt=require("bcrypt");
 const adminModel=require("../models/model")
 
 
-
+  /// not to be used , made just for checking purpose
 const createpassword=async(req,res)=>{
     try {
         
