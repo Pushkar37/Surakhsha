@@ -1,25 +1,24 @@
 const express=require('express');
 
-const ViewController = require('../ControllerFunction/ViewController');
+
 const loginController = require('../ControllerFunction/loginController');
 const createpassword = require('../ControllerFunction/createPassword');
-const restrict=require("../ControllerFunction/restrictbackwards")
+const AuthController = require('../ControllerFunction/AuthController');
+
 
 const userRouter=express.Router();
 
-userRouter.get("/register",(req,res)=>{
-    
-    res.render("register.ejs")
-})
-userRouter.get("/login",restrict,(req,res)=>{
+userRouter.get("/login",(req,res)=>{
     res.render("login.ejs")
 })
-userRouter.get("/view",ViewController)
+userRouter.get("/view",AuthController,(req,res)=>{
+    res.render("homepage.ejs")
+})
 
-userRouter.get("/volunteers",(req,res)=>{
+userRouter.get("/volunteers",AuthController,(req,res)=>{
     res.render("addvolunteers.ejs")
 })
-userRouter.get("/history",(req,res)=>{
+userRouter.get("/history",AuthController,(req,res)=>{
     res.render("history_and_analysis.ejs")
 })
 
@@ -27,8 +26,12 @@ userRouter.post("/login-user",loginController)
 //the below 2 routes were just for creating encrypted password in the database , unimportant routes 
 
 // userRouter.get("/register",(req,res)=>{
-//     res.render("register.ejs")
-// })
-// userRouter.post("/createpassword",createpassword)
-
-module.exports=userRouter;
+    //     res.render("register.ejs")
+    // })
+    // userRouter.post("/createpassword",createpassword)
+    
+    // userRouter.get("/register",(req,res)=>{
+        
+    //     res.render("register.ejs")
+    // })
+    module.exports=userRouter;

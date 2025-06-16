@@ -1,6 +1,6 @@
 const jwt=require('jsonwebtoken');
 
-const ViewController=(req,res)=>{
+const AuthController=(req,res,next)=>{
     try {
         const{token}=req.cookies;
         if(!token){
@@ -10,7 +10,7 @@ const ViewController=(req,res)=>{
         }
         const DecodeToken=jwt.verify(token,"pushkaristhebest");
         if(DecodeToken){
-           res.render("homepage.ejs");
+           next();
         }
         else{
              
@@ -22,4 +22,4 @@ const ViewController=(req,res)=>{
   
     }
 }
-module.exports=ViewController;
+module.exports=AuthController;
