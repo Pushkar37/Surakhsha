@@ -1,9 +1,8 @@
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
-const Admin = require("../config/database");
-const db = require("../config/database");
-const {  collection,addDoc ,getDocs } =require( 'firebase/firestore/lite');
-const adminModel = require("../models/model");
+const getData = require("../config/database");
+
+
 const loginController=async(req,res)=>{
       res.clearCookie('token');
       // this is databse code kindly change it to firebase and make sure admin is a single object with all the required feilds present in it only 
@@ -13,8 +12,15 @@ const loginController=async(req,res)=>{
            
             res.redirect("http://localhost:1000/user/login")
         }
-        // check for correct username and password  ---> hashpassword to be fetched from the database
-         let admin= await adminModel.findOne({email:email});
+        
+        const dataall=await getData("admin");
+        let admin=null;
+        dataall.forEach(e => {
+            if(e.email==email){
+                admin=e
+            }
+        });
+
       
             
        

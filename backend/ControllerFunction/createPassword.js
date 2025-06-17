@@ -1,6 +1,7 @@
 const bcrypt=require("bcrypt");
-const adminModel=require("../models/model")
-
+const adminModel=require("../models/model");
+const addData = require("../config/database");
+const {uuid}=require("uuidv4");
 
   /// not to be used , made just for checking purpose
 const createpassword=async(req,res)=>{
@@ -13,10 +14,14 @@ const createpassword=async(req,res)=>{
 
         const hashpassword= await bcrypt.hash(password,10);
         try {
-            
-        const admin=new adminModel({email:email,password:hashpassword})
-        const newadmin=await admin.save();
-         
+          id=uuid()
+          const data={
+              id,
+              email:email,
+              password:hashpassword
+          }
+            addData("admin",data, id )
+      
          console.log(newadmin)
           
 

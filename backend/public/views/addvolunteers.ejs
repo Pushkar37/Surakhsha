@@ -71,16 +71,20 @@
                 <h2 class="text-xl font-semibold">All Volunteers</h2>
                 <div class="overflow-scroll p-2 h-[210px]">
                   <div class="volunteer_added flex justify-between items-center p-2 bg-gray-200 rounded-lg mb-2 mt-2">
+                   <% alldata.forEach((e)=> { %>
+                    
+                
                     <div class="flex gap-2 items-center ">
                       <div class="rounded-full bg-red-500 h-[15px] w-[15px]"></div><div>
-                        Name
+                       <%= e.name %> 
                         <p class="text-sm">
                           
-                          number LOcation
+                          <%= e.number %> LOcation
                         </p>
                       </div>
                       
                     </div>
+                       <% }) %>
                     <div>
                       edit
                       delete
@@ -93,18 +97,18 @@
                 <div class="bg-white flex flex-col p-4 w-[45%]">
                   <h2  class="text-3xl font-semibold mb-10">Add new Volunteer</h2>
                   <div>
-                    <form action="" class="font-semibold">
+                    <form id="addnew" action="/user/addVolunteer" method="POST" class="font-semibold">
                       <p class="text-xl mb-2">
                         Full name
                         
                       </p>
-                      <input type="text" name="fullname " placeholder="Enter Volunteer Name" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
+                      <input type="text" name="name" placeholder="Enter Volunteer Name" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
                       <br>
                       <p  class="text-xl mb-2">
                         Phone number
                         
                       </p>
-                      <input type="text" name="phone" placeholder="+91 9407370474" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
+                      <input type="text" name="number" placeholder="+91 9407370474" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
                       <br>
                       <div class="flex justify-between">
                         
@@ -122,6 +126,8 @@
               
   </body>
 <script>
+  var addnew=document.getElementById("addnew");
+  
   var cancelbtn=document.getElementById('cancelbtn');
   var popup=document.getElementById('Add_popup');
   var Add=document.getElementById('Add');

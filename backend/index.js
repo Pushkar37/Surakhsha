@@ -7,7 +7,8 @@ const http=require('http')
 const socketio=require('socket.io');
 const path=require('path')
 const cookie=require('cookie-parser');
-const ConnectToDb=require("./config/database")
+const getData = require('./config/database')
+
 
 const port= process.env.Port || 1000;
 const app= express();
@@ -16,7 +17,7 @@ dotenv.config();
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'public','views'));
 
-ConnectToDb();
+
 // //use of middleware for easier facillation of coding
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.static('public'));

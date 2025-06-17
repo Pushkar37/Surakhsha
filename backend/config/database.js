@@ -1,9 +1,28 @@
-const mongoose = require("mongoose");
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebaseServiceAccount.json');
 
-const ConnectToDb=async ()=>{
-  await  mongoose.connect("mongodb+srv://pushkarsharma5555:pushkar123@cluster0.ebuioqu.mongodb.net/").then(()=>{
-    console.log("Connection Established")
-  })
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+})
+const db=admin.firestore();
+
+async function addData(collection,data,id) {
+    try {
+      const docRef = db.collection(collection).doc(id);
+      await docRef.set(data);
+      console.log("data is added" + data)
+    } catch (error) {
+      console.log(error);
+      console.log("error adding data");
+    }
 }
-
-module.exports = ConnectToDb;
+async function getData(collection) {
+  try {
+    const docRef= await db.collection(collection).get()
+    const data=docRef.docs.map((doc)=>doc.data())
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+module.exports={addData,getData};
