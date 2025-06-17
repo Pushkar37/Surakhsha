@@ -6,6 +6,7 @@ const {  collection,addDoc ,getDocs } =require( 'firebase/firestore/lite');
 const adminModel = require("../models/model");
 const loginController=async(req,res)=>{
       res.clearCookie('token');
+      // this is databse code kindly change it to firebase and make sure admin is a single object with all the required feilds present in it only 
       try {
         const{email,password}=req.body;
         if(!email||!password){
