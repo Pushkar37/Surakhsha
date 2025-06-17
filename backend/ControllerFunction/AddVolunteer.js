@@ -8,9 +8,9 @@ const addVolunteer= async(req,res)=>{
         const{name,number}=req.body
         console.log(name)
         console.log(number)
-       if(name==""||number==""){
-        res.redirect("http:/localhost:1000/user/volunteers");
-       }
+       if(!name||!number){
+        res.redirect("volunteers");
+       }else{
         //database query for adding volunteer to database.
         try {
             const id=uuid();
@@ -19,7 +19,7 @@ const addVolunteer= async(req,res)=>{
                 name:name,
                 number:number
             }
-         addData("Volunteers",data,id).then( res.redirect("http://localhost:1000/user/volunteers"));
+         addData("Volunteers",data,id).then( res.redirect("http:/localhost:1000/user/volunteers"));
            
    } catch (error) {
        console.log(error);
@@ -27,7 +27,7 @@ const addVolunteer= async(req,res)=>{
     }
 
     
-
+       }
 } catch (error) {
     console.log(error);
 }

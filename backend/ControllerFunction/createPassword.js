@@ -1,5 +1,5 @@
 const bcrypt=require("bcrypt");
-const adminModel=require("../models/model");
+
 const addData = require("../config/database");
 const {uuid}=require("uuidv4");
 

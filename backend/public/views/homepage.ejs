@@ -325,10 +325,7 @@ var cross=document.getElementById("cross");
 cross.addEventListener("click",()=>{
     sos.classList.add('hidden');
 })
-var Active_Sos=document.getElementById('Activesos')
-Active_Sos.addEventListener("click",()=>{
-    sos.classList.remove('hidden');
-})
+
 window.addEventListener('popstate', function () {
   // Send a request to the server to delete the cookie
   fetch('http://localhost:1000/login-user', { method: 'POST' })

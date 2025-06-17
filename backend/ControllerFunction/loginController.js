@@ -1,6 +1,6 @@
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
-const getData = require("../config/database");
+const {getData} = require("../config/database");
 
 
 const loginController=async(req,res)=>{
