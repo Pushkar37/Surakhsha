@@ -37,7 +37,7 @@ const loginController=async(req,res)=>{
         }
        const token=jwt.sign({
         userId:admin.id
-       },"pushkaristhebest"); //JWT_SECERETURI NOT YET CREATED
+       },process.env.JWT_secret); //JWT_SECERETURI NOT YET CREATED
        res.cookie('token',token,{expire: 86400000 + Date.now()});
        res.redirect("http://localhost:1000/user/view");
     }} catch (error) {
