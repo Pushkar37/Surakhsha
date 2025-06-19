@@ -76,10 +76,10 @@
                 
                     <div class="flex gap-2 items-center ">
                       <div class="rounded-full bg-red-500 h-[15px] w-[15px]"></div><div>
-                       <%= e.name %> 
+                       <span class="name"><%= e.name %></span> 
                         <p class="text-sm">
                           
-                          <%= e.number %> LOcation
+                         <span class="volunteer_id"><%= e.id %></span>  LOcation
                         </p>
                       </div>
                       
@@ -99,6 +99,7 @@
                   <h2  class="text-3xl font-semibold mb-10">Add new Volunteer</h2>
                   <div>
                     <form id="addnew" action="/user/addVolunteer" method="POST" class="font-semibold">
+                     
                       <p class="text-xl mb-2">
                         Full name
                         
@@ -125,23 +126,30 @@
                 <div class="bg-white flex flex-col p-4 w-[45%]">
                   <h2  class="text-3xl font-semibold mb-10">Edit  Volunteer</h2>
                   <div>
-                    <form id="addnew" action="/user/addVolunteer" method="PATCH" class="font-semibold">
+                    <form id="updateold" action="/user/UpdateVolunteer" method="PATCH" class="font-semibold">
+                      
+                       <p class="text-xl mb-2">
+                        Volunteer id
+                        
+                      </p>
+                      <input id="Volunteer_id" type="text" readonly name="id" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
+                      <br>
                       <p class="text-xl mb-2">
                         Full name
                         
                       </p>
-                      <input type="text" name="name" placeholder="Enter Volunteer Name" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
+                      <input id="Volunteer_name" type="text" name="name" placeholder="Enter Volunteer Name" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
                       <br>
                       <p  class="text-xl mb-2">
                         Phone number
                         
                       </p>
-                      <input type="text" name="number" placeholder="+91 9407370474" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
+                      <input id="Volunteer_num type="text" name="number" placeholder="+91 9407370474" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
                       <br>
                       <div class="flex justify-between">
                         
-                        <button class="p-2 w-[40%] bg-black text-white rounded-lg cursor-pointer">Update Volunteer</button>
-                        <button type="button" id="cancelbtnupdate"  class="   p-2 w-[40%] bg-gray-300 rounded-lg cursor-pointer">Cancel</button>
+                        <button type="submit" class="p-2 w-[40%] bg-black text-white rounded-lg cursor-pointer">Update Volunteer</button>
+                        <button type="button" id="cancelbtnupdate"  class="p-2 w-[40%] bg-gray-300 rounded-lg cursor-pointer">Cancel</button>
                       </div>
                       
                         </form>
@@ -161,15 +169,26 @@
   var cancelbtnUPDATE=document.getElementById("cancelbtnupdate");
   var cancelbtnadd=document.getElementById("cancelbtnadd");
   var Add=document.getElementById('Add');
+  var idss=document.querySelectorAll('.volunteer_id')
   Add.addEventListener("click",(e)=>{
     e.preventDefault();
     popup.classList.remove('hidden')
   })
-  editbtn.forEach((e)=>{
-    
+  
+ var  arr=[];
+  count=0;
+idss.forEach((e)=>{
+ arr[count++]=e.innerText;
+})
+  countid=0;
+  editbtn.forEach((e,index)=>{
     e.addEventListener("click",(e)=>{
       e.preventDefault();
       editcurr.classList.remove('hidden');
+      idx=countid%arr.length;
+     const id=arr[index];
+      document.getElementById("Volunteer_id").value=id;
+      
     })
   })
   cancelbtnUPDATE.addEventListener("click",(e)=>{

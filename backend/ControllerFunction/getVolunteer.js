@@ -1,7 +1,7 @@
 const {getData}=require("../config/database");
 const getVolunteer=async(req,res)=>{
   try {
-      const alldata=await getData("Volunteers");
+      const alldata=await getData("volunteers");
   
       res.render("addvolunteers.ejs",{alldata})
      

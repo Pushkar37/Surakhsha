@@ -19,7 +19,7 @@ const addVolunteer= async(req,res)=>{
                 name:name,
                 number:number
             }
-         addData("Volunteers",data,id).then( res.redirect("http:/localhost:1000/user/volunteers"));
+         addData("volunteers",data,id).then( res.redirect("http:/localhost:1000/user/volunteers"));
            
    } catch (error) {
        console.log(error);
