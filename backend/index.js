@@ -4,13 +4,13 @@ const cors =require( 'cors')
 const dotenv= require('dotenv') 
 const userRouter=require("./routes/userRoutes")
 const http=require('http')
-const socketio=require('socket.io');
 const path=require('path')
 const cookie=require('cookie-parser');
-const getData = require('./config/database')
 const methodOverride = require('method-override')
 
-const port= process.env.Port || 1000;
+
+
+const port= process.env.PORT || 1000;
 const app= express();
 const server=http.createServer(app);
 dotenv.config();
@@ -27,16 +27,6 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cookie());
 app.use(methodOverride('_method'))
-//websocket used for establishing connection
-// const io=new socketio(server);
-//  io.on("connection",function (socket){
-//     socket.on("send-location",function(data){
-//         io.emit("recive-location",{id:socket.id,...data});
-//     });
-//     socket.on("disconnect",function(){
-//         io.emit("disconneted",socket.id)
-//     })
-//  });
 
 //routes 
  app.use("/user",userRouter);
