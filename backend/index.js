@@ -8,7 +8,7 @@ const socketio=require('socket.io');
 const path=require('path')
 const cookie=require('cookie-parser');
 const getData = require('./config/database')
-
+const methodOverride = require('method-override')
 
 const port= process.env.Port || 1000;
 const app= express();
@@ -26,6 +26,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cookie());
+app.use(methodOverride('_method'))
 //websocket used for establishing connection
 // const io=new socketio(server);
 //  io.on("connection",function (socket){

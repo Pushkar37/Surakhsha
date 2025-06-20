@@ -71,22 +71,26 @@
                 <h2 class="text-xl font-semibold">All Volunteers</h2>
                 <div class="overflow-scroll p-2 h-[210px]">
                   <% alldata.forEach((e)=> { %>
-                  <div class="volunteer_added flex justify-between items-center p-2 bg-gray-200 rounded-lg mb-2 mt-2">
-                    
-                
-                    <div class="flex gap-2 items-center ">
-                      <div class="rounded-full bg-red-500 h-[15px] w-[15px]"></div><div>
-                       <span class="name"><%= e.name %></span> 
-                        <p class="text-sm">
+                    <form action="/user/deleteVolunteer?_method=DELETE" method="POST">
+
+                      <div class="volunteer_added flex justify-between items-center p-2 bg-gray-200 rounded-lg mb-2 mt-2">
+                        
+                        
+                        <div class="flex gap-2 items-center ">
+                          <div class="rounded-full bg-red-500 h-[15px] w-[15px]"></div><div>
+                            <span class="name"><%= e.name %></span> 
+                            <p class="text-sm">
+                              
+                              <span class="volunteer_id"><%= e.id %></span>  LOcation
+                              <span><input type="text" class="hidden" name="delete_id" value=<%= e.id %> readonly> </span>
+                            </p>
+                          </div>
                           
-                         <span class="volunteer_id"><%= e.id %></span>  LOcation
-                        </p>
-                      </div>
-                      
-                    </div>
-                    <div>
-                      <button  class="editBtn cursor-pointer text-black p-2 px-6 font-semibold rounded-full border">Edit</button>
-                      <button class="cursor-pointer bg-black text-white p-2 px-6 font-semibold rounded-full border">Delete</button>
+                        </div>
+                        <div>
+                          <button type="button"  class="editBtn cursor-pointer text-black p-2 px-6 font-semibold rounded-full border">Edit</button>
+                          <button type="submit" class="cursor-pointer bg-black text-white p-2 px-6 font-semibold rounded-full border">Delete</button>
+                        </form>
                       
                     </div>
                   </div>
@@ -126,7 +130,7 @@
                 <div class="bg-white flex flex-col p-4 w-[45%]">
                   <h2  class="text-3xl font-semibold mb-10">Edit  Volunteer</h2>
                   <div>
-                    <form id="updateold" action="/user/UpdateVolunteer" method="PATCH" class="font-semibold">
+                    <form id="updateold" action="/user/UpdateVolunteer?_method=PATCH" method="POST" class="font-semibold">
                       
                        <p class="text-xl mb-2">
                         Volunteer id
