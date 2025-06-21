@@ -7,15 +7,15 @@ const AuthController = require('../ControllerFunction/AuthController');
 const addVolunteer = require('../ControllerFunction/AddVolunteer');
 const getVolunteer = require('../ControllerFunction/getVolunteer');
 const deleteController = require('../ControllerFunction/deleteVolunteer');
-const retriveData = require('../ControllerFunction/RetriveData');
 const updateVolunteer = require('../ControllerFunction/UpdateVolunteer');
-
+const retriveData = require('../ControllerFunction/RetriveData');
 
 const userRouter=express.Router();
 userRouter.patch("/UpdateVolunteer",updateVolunteer)
 userRouter.get("/volunteerdata",retriveData);
 userRouter.post("/addVolunteer",addVolunteer)
 userRouter.delete("/deleteVolunteer",deleteController)
+userRouter.put("/updateVolunteer", updateVolunteer)
 userRouter.get("/login",(req,res)=>{
     res.render("login.ejs")
 })

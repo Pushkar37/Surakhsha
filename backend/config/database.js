@@ -25,4 +25,15 @@ async function getData(collection) {
     console.log(error)
   }
 }
-module.exports={addData,getData};
+
+async function updateData(collection, id, updatedFields) {
+  try {
+    const docRef = db.collection(collection).doc(id);
+    await docRef.update(updatedFields);
+    console.log("Data updated:", updatedFields);
+  } catch (error) {
+    console.log("Error updating data:", error);
+  }
+}
+
+module.exports={addData,getData,updateData};
