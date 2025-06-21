@@ -25,4 +25,22 @@ async function getData(collection) {
     console.log(error)
   }
 }
-module.exports={addData,getData};
+async function updateData(collection, id, updates) {
+  try {
+    const docRef = db.collection(collection).doc(id);
+    await docRef.update(updates);
+    console.log("Data updated for ID:", id);
+  } catch (error) {
+    console.error("Error updating data:", error);
+  }
+}
+async function deleteData(collection, id) {
+  try {
+    const docRef = db.collection(collection).doc(id);
+    await docRef.delete();
+    console.log("Data deleted for ID:", id);
+  } catch (error) {
+    console.error("Error deleting data:", error);
+  }
+}
+module.exports={addData,getData,updateData,deleteData};
