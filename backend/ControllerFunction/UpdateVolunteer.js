@@ -1,32 +1,21 @@
 // controllers/updateVolunteer.js
-
-const { db } = require("../config/database");
+const { updateData } = require("../config/database");
 
 const updateVolunteer = async (req, res) => {
-  const { id } = req.body;
-  const { name, number } = req.body;
-
   try {
-    const docRef = db.collection("Volunteers").doc(id);
+    const { id, name, number } = req.body;
 
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      return res.status(404).json({ message: "Volunteer not found" });
-    }
+    const updated = {};
+    if (name) updated.name = name;
+    if (number) updated.number = number;
 
-    const updateData = {};
-    if (name) updateData.name = name;
-    if (number) updateData.number = number;
-
-    if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({ message: "No update fields provided" });
-    }
-
-    await docRef.update(updateData);
-    res.status(200).json({ message: "Volunteer updated successfully" });
+    await updateData("volunteers", id, updated);
+    console.log("Data updated:", updated);
+    res.status(200).redirect("http://localhost:1000/user/volunteers");
+   
   } catch (error) {
-    console.error("Error updating volunteer:", error);
-    res.status(500).json({ message: "Failed to update volunteer" });
+    console.error("Update failed:", error);
+    res.status(500).redirect("http://localhost:1000/user/volunteers");
   }
 };
 
