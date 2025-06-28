@@ -6,6 +6,7 @@ admin.initializeApp({
 })
 const db=admin.firestore();
 
+
 async function addData(collection,data,id) {
     try {
       const docRef = db.collection(collection).doc(id);
@@ -43,4 +44,4 @@ async function deleteData(collection, id) {
     console.error("Error deleting data:", error);
   }
 }
-module.exports={addData,getData,updateData,deleteData};
+module.exports={ db, addData,getData,updateData,deleteData};

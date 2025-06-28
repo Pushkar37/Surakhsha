@@ -8,7 +8,7 @@ const AuthController=(req,res,next)=>{
             return res.redirect("http://localhost:1000/user/login")
          
         }
-        const DecodeToken=jwt.verify(token,"process.env.JWT_SECRETt");
+        const DecodeToken=jwt.verify(token,process.env.JWT_SECRET);
         if(DecodeToken){
            next();
         }
