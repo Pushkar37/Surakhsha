@@ -6,6 +6,7 @@ admin.initializeApp({
 })
 const db=admin.firestore();
 
+
 async function addData(collection,data,id) {
     try {
       const docRef = db.collection(collection).doc(id);
@@ -25,15 +26,22 @@ async function getData(collection) {
     console.log(error)
   }
 }
-
-async function updateData(collection, id, updatedFields) {
+async function updateData(collection, id, updates) {
   try {
     const docRef = db.collection(collection).doc(id);
-    await docRef.update(updatedFields);
-    console.log("Data updated:", updatedFields);
+    await docRef.update(updates);
+    console.log("Data updated for ID:", id);
   } catch (error) {
-    console.log("Error updating data:", error);
+    console.error("Error updating data:", error);
   }
 }
-
-module.exports={addData,getData,updateData};
+async function deleteData(collection, id) {
+  try {
+    const docRef = db.collection(collection).doc(id);
+    await docRef.delete();
+    console.log("Data deleted for ID:", id);
+  } catch (error) {
+    console.error("Error deleting data:", error);
+  }
+}
+module.exports={ db, addData,getData,updateData,deleteData};
