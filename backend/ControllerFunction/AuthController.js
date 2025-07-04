@@ -14,7 +14,7 @@ const AuthController=(req,res,next)=>{
         }
         else{
              
-            res.redirect("http://localhost:1000/user/login")
+            res.redirect("http:/localhost:1000/user/login")
            
         }
     } catch (error) {
