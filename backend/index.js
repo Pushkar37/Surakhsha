@@ -31,7 +31,7 @@ app.use(methodOverride('_method'))
 
 //routes 
  app.use("/user",userRouter);
-app.get("/user/view",(req,res)=> res.send("API Working"));
+app.get("/",(req,res)=> res.redirect("/user/view"));
 server.listen(port,()=>{
     console.log("Server started")
 })
