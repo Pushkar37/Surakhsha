@@ -10,7 +10,7 @@ const loginController=async(req,res)=>{
         const{email,password}=req.body;
         if(!email||!password){
            
-            res.redirect("http://localhost:1000/user/login")
+            res.redirect("/user/login")
         }
         
         const dataall=await getData("admin");

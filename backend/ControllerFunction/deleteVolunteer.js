@@ -27,7 +27,7 @@ const deleteController = async (req, res) => {
 
     await volunteerRef.delete();
     console.log(` Volunteer with ID ${id} deleted successfully.`);
-    return res.redirect("http://localhost:1000/user/volunteers");
+    return res.redirect("/user/volunteers");
     //return res.status(200).json({ message: "Volunteer deleted successfully" });
   } catch (error) {
     console.error("Error deleting volunteer:", error);
