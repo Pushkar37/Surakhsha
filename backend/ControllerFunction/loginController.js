@@ -27,19 +27,19 @@ const loginController=async(req,res)=>{
           console.log(admin);
         
         if(admin==null){
-         res.redirect("http://localhost:1000/user/login")
+         res.redirect("/user/login")
         }else{
         
         const check=bcrypt.compare(password,admin.password);
         if(!check){
             
-            res.redirect("http://localhost:1000/user/login")
+            res.redirect("/user/login")
         }
        const token=jwt.sign({
         userId:admin.id
        },process.env.JWT_SECRET); //JWT_SECERETURI NOT YET CREATED
        res.cookie('token',token,{expire: 86400000 + Date.now()});
-       res.redirect("http://localhost:1000/user/view");
+       res.redirect("/user/view");
     }} catch (error) {
         console.log(error)
         res.json({
