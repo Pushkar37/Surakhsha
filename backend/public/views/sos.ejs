@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body class="backdrop-blur-sm bg-black/30  flex items-center justify-center">
+    <div class="min:p-4 md:p-6 lg:p-8  min-h-screen  flex jusitify-center items-center ">
+     <div class="max-w-7xl flex justify-center items-center  ">
+       <div class="mb-10 w-7xl flex justify-center items-center ">
+        <div class="bg-white flex flex-col  gap-3 rounded-lg shadow-lg p-4 w-[50%]  " >
+              <h1 class="text-3xl text-center">SOS</h1>
+              <div class="text-xl font-semibold">Name : </div>
+              <div class="bg-gray-100 p-2 rounded-lg border-black border-2 ">
+                <%= sosdetails.name %>
+              </div>
+              <div class="text-xl font-semibold">Email </div>
+              <div class="bg-gray-100 p-2 rounded-lg border-black border-2 ">
+                <%= sosdetails.email %>
+              </div>
+              <div class="text-xl font-semibold">Number </div>
+              <div class="bg-gray-100 p-2 rounded-lg border-black border-2 ">
+                <%= sosdetails.number %>
+              </div>
+              <div  class="text-xl font-semibold">Latitude:</div>
+             <div class="bg-gray-100 p-2 rounded-lg border-black border-2  ">
+                 <%= sosdetails.currentLocation._latitude%>
+              </div>
+              <div  class="text-xl font-semibold">Longitude:</div>
+             <div class="bg-gray-100 p-2 rounded-lg border-black border-2  ">
+                  <%= sosdetails.currentLocation._longitude%>
+              </div>
+            
+              
+              <div class="flex justify-between  ">
+
+                  <div  class="text-xl font-semibold">  <span class="text-[15px] bg-red-400 p-2 rounded-full text-white"> High </span></div>
+                 
+                  
+                  <div  class="text-xl font-semibold">Resolved:<span class=" font-bold text-red-400   p-2 rounded-full"><%= sosdetails.resolved %></span></div>
+                  
+                </div>
+                <div  class="text-xl font-semibold">Volunteer:<span class="text-[15px] font-semibold text-blue-400  p-2 rounded-full"><%= sosdetails.volunteer %></span></div>
+                <div  class="text-xl font-semibold text-center"><span class="text-[15px]  p-2 rounded-full"><%= sosdetails.date.toDate() %></span></div>
+                <form action="/user/history">
+
+                  <button type="submit" class="text-white p-1 bg-black rounded-lg cursor-pointer  w-[25%]">Close</button>
+                </form>
+        </div> 
+        </div>
+        </div>
+        </div>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <title>Report</title>
+</head>
+<body class="backdrop-blur-sm bg-black/30  flex items-center justify-center">
+    <div class="min:p-4 md:p-6 lg:p-8  min-h-screen  flex jusitify-center items-center ">
+     <div class="max-w-7xl flex justify-center items-center  ">
+       <div class="mb-10 w-7xl flex justify-center items-center ">
+        <div class="bg-white flex flex-col  gap-3 rounded-lg shadow-lg p-4 w-[50%]  " >
+              <h1 class="text-3xl text-center">Report</h1>
+              <div class="text-xl font-semibold">Title : </div>
+              <div class="bg-gray-100 p-2 rounded-lg border-black border-2 ">
+                 <%= reportDetails.incidentType.toUpperCase() %>
+              </div>
+              <div  class="text-xl font-semibold">Area of the incident:</div>
+             <div class="bg-gray-100 p-2 rounded-lg border-black border-2  ">
+                 <%= reportDetails.address %>
+              </div>
+              <div  class="text-xl font-semibold">Type of injury</div>
+ <div class="bg-red-300 p-2 rounded-lg border-black border-2  ">
+                 <%= reportDetails.injuryType %>
+              </div>
+              <div  class="text-xl font-semibold">Incident Happend:</div>
+           <div class="bg-gray-100 p-2 rounded-lg border-black border-2 overflow-scroll h-[125px] ">
+                 <%= reportDetails.incidentDiscription %>
+              </div>
+              <div class="flex justify-between  ">
+
+                  
+                 
+                  
+                  <div  class="text-xl font-semibold">user:<span class="text-[15px] bg-blue-300 p-2 rounded-full"><%= reportDetails.email %></span></div>
+                  
+                </div>
+                <div  class="text-xl font-semibold text-center"><span class="text-[15px]  p-2 rounded-full"><%= reportDetails.date.toDate() %></span></div>
+                <form action="/user/history">
+
+                  <button type="submit" class="text-white p-1 bg-black rounded-lg cursor-pointer  w-[25%]">Close</button>
+                </form>
+        </div> 
+        </div>
+        </div>
+        </div>
+    
+
+
+</body>
+</html>

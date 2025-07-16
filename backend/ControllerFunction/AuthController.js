@@ -10,6 +10,7 @@ const AuthController=(req,res,next)=>{
         }
         const DecodeToken=jwt.verify(token,process.env.JWT_SECRET);
         if(DecodeToken){
+          
            next();
         }
         else{

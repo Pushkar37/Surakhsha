@@ -8,14 +8,25 @@ const addVolunteer = require('../ControllerFunction/AddVolunteer');
 const getVolunteer = require('../ControllerFunction/getVolunteer');
 const deleteController = require('../ControllerFunction/deleteVolunteer');
 const updateVolunteer = require('../ControllerFunction/UpdateVolunteer');
-const retriveData = require('../ControllerFunction/RetriveData');
+
+const historyController = require('../ControllerFunction/History');
+const viewReport = require('../ControllerFunction/ViewReports');
+const sosViewer = require('../ControllerFunction/ViewSos');
+
+const modAuthController = require('../ControllerFunction/changepassword');
+const changepassword = require('../ControllerFunction/changepassword');
+const changepassword2 = require('../ControllerFunction/changepassword2');
+const resolveSos = require('../ControllerFunction/ResolveSos');
 
 const userRouter=express.Router();
+
+
 userRouter.patch("/UpdateVolunteer",updateVolunteer)
-userRouter.get("/volunteerdata",retriveData);
+userRouter.post("/resolvesos/:id",resolveSos)
 userRouter.post("/addVolunteer",addVolunteer)
 userRouter.delete("/deleteVolunteer",deleteController)
 userRouter.put("/updateVolunteer", updateVolunteer)
+userRouter.patch("/changepassword",changepassword2)
 userRouter.get("/login",(req,res)=>{
     res.render("login.ejs")
 })
@@ -24,10 +35,10 @@ userRouter.get("/view",AuthController,(req,res)=>{
 })
 
 userRouter.get("/volunteers",AuthController,getVolunteer)
-userRouter.get("/history",AuthController,(req,res)=>{
-    res.render("history_and_analysis.ejs")
-})
-
+userRouter.get("/history",AuthController,historyController)
+userRouter.get("/history/reports/:id",AuthController,viewReport)
+userRouter.get("/history/sos/:id",AuthController,sosViewer)
+userRouter.get("/changepassword",AuthController,changepassword)
 userRouter.post("/login-user",loginController)
 //the below 2 routes were just for creating encrypted password in the database , unimportant routes 
 

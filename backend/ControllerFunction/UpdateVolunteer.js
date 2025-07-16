@@ -11,11 +11,11 @@ const updateVolunteer = async (req, res) => {
 
     await updateData("volunteers", id, updated);
     console.log("Data updated:", updated);
-    res.status(200).redirect("http://localhost:1000/user/volunteers");
+    res.status(200).redirect("/user/volunteers");
    
   } catch (error) {
     console.error("Update failed:", error);
-    res.status(500).redirect("http://localhost:1000/user/volunteers");
+    res.status(500).redirect("/user/volunteers");
   }
 };
 

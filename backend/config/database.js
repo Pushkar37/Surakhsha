@@ -26,6 +26,15 @@ async function getData(collection) {
     console.log(error)
   }
 }
+async function getDatawithId(collection,id) {
+  try {
+    const data= (await db.collection(collection).doc(id).get()).data();
+    
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
 async function updateData(collection, id, updates) {
   try {
     const docRef = db.collection(collection).doc(id);
@@ -44,4 +53,4 @@ async function deleteData(collection, id) {
     console.error("Error deleting data:", error);
   }
 }
-module.exports={ db, addData,getData,updateData,deleteData};
+module.exports={ db, addData,getDatawithId,getData,updateData,deleteData};

@@ -1,6 +1,6 @@
 const bcrypt=require("bcrypt");
 
-const addData = require("../config/database");
+const {addData} = require("../config/database");
 const {uuid}=require("uuidv4");
 
   /// not to be used , made just for checking purpose

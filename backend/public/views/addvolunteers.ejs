@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -20,25 +22,25 @@
            <div class="p-1.5 bg-red-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-triangle" class="lucide lucide-alert-triangle h-4 w-4 md:h-5 md:w-5 text-red-600"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
                             </div>  
-            <span class="px-2">Active SOS <br><span class="text-black-500 text-xl">1</span></span>
+            <span class="px-2">Active SOS <br><span id="active_soscount" class="text-black-500 text-xl"></span></span>
           </div>
           <div class="  text-sm font-semibold border-1  border-white w-[40%] md:w-70 shadow-lg rounded-lg  bg-gray-50  p-2  h-20 flex  items-center">
             <div class="p-1.5 bg-red-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-text" class="lucide lucide-file-text h-4 w-4 md:h-5 md:w-5 text-red-600"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
                             </div> 
-            <span class="px-2">Reports <br><span class=" text-black-500 text-xl font-semibold">1</span></span>
+            <span class="px-2">Reports <br><span id="report_count" class=" text-black-500 text-xl font-semibold"></span></span>
           </div>
           <div class="  text-sm font-semibold border-1  border-white w-[40%] md:w-70 shadow-lg rounded-lg  bg-gray-50  p-2 h-20 flex  items-center">
              <div class="p-1.5 bg-green-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity" class="lucide lucide-activity h-4 w-4 md:h-5 md:w-5 text-green-600"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
                             </div>  
-            <span class="px-2">Active Volunteers <br><span class="text-black-500 text-xl font-semibold">1</span></span>
+            <span class="px-2">Active Volunteers <br><span id="volunteer_active" class="text-black-500 text-xl font-semibold"></span></span>
           </div>
           <div class="  text-sm font-semibold border-1 w-[40%]  md:w-70 border-white shadow-lg  rounded-lg bg-gray-50  p-2  h-20 flex  items-center">
            <div class="p-1.5 bg-blue-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" class="lucide lucide-users h-4 w-4 md:h-5 md:w-5 text-blue-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
                             </div>  
-                  <span class="px-2">Total Volunteers <br><span class="text-black-500 text-xl font-semibold">1</span></span>
+                  <span class="px-2">Total Volunteers <br><span id="volunteertotal" class="text-black-500 text-xl font-semibold"></span></span>
                 </div>
               </div>
               
@@ -81,7 +83,9 @@
                             <span class="name"><%= e.name %></span> 
                             <p class="text-sm">
                               
-                              <span class="volunteer_id"><%= e.id %></span>  LOcation
+                              <span class="volunteer_id hidden"><%= e.id %></span> 
+                              <span>Location ,</span>
+                              <span class="font-semibold   "> <%= e.number %></span>
                               <span><input type="text" class="hidden" name="delete_id" value=<%= e.id %> readonly> </span>
                             </p>
                           </div>
@@ -110,11 +114,23 @@
                       </p>
                       <input type="text" name="name" placeholder="Enter Volunteer Name" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
                       <br>
+                      <p class="text-xl mb-2">
+                        Email id
+                        
+                      </p>
+                      <input type="email" name="email" placeholder="Enter Volunteer email" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
+                      <br>
+                      <p class="text-xl mb-2">
+                        Password
+                        
+                      </p>
+                      <input type="password" name="password" placeholder="Set Volunteer password" class="w-[100%] p-2 mb-2 border-gray-500 border-2 rounded-lg">
+                      <br>
                       <p  class="text-xl mb-2">
                         Phone number
                         
                       </p>
-                      <input type="text" name="number" placeholder="+91 9407370474" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
+                      <input type="text" name="number" placeholder="+91 9409321254" class="w-[100%] p-2 mb-6 border-gray-500 border-2 rounded-lg">
                       <br>
                       <div class="flex justify-between">
                         
@@ -166,6 +182,17 @@
               
   </body>
 <script>
+  const firebaseConfig = {
+      apiKey: "AIzaSyC-SWfn3GRLPjLZnOZf2LDlffy1Zuli0Lo",
+      authDomain: "suraksha-100-f498d.firebaseapp.com",
+      projectId: "suraksha-100-f498d",
+      storageBucket: "suraksha-100-f498d.firebasestorage.app",
+      messagingSenderId: "478330768262",
+      appId: "1:478330768262:web:a1bb236ae023d8ad6bba07",
+      measurementId: "G-BBPNLVL4PM"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
   var addnew=document.getElementById("addnew");
   var editcurr=document.getElementById("Update_popup");
   var editbtn=document.querySelectorAll(".editBtn");
@@ -203,6 +230,50 @@ idss.forEach((e)=>{
      e.preventDefault();
     popup.classList.add('hidden');
   })
-  
+  const activesoscount=document.getElementById('active_soscount')
+const reportcount=document.getElementById('report_count')
+const activevolunteer=document.getElementById('volunteer_active')
+const totalvolunteers=document.getElementById('volunteertotal')
+
+
+ db.collection('sos').onSnapshot((snapshot)=>{
+   var count=0;
+    snapshot.forEach(doc=>{
+      const data=doc.data()
+      if(!data.resolved){
+
+        count++;
+      }
+
+    })
+    activesoscount.innerText=count;
+})
+
+db.collection('reports').onSnapshot((snapshot)=>{
+   var count=0;
+    snapshot.forEach(doc=>{
+        count++;
+    })
+    reportcount.innerText=count;
+})
+
+db.collection('volunteers').onSnapshot((snapshot)=>{
+   var count=0;
+    snapshot.forEach(doc=>{
+        count++;
+    })
+    totalvolunteers.innerText=count;
+})
+db.collection('volunteers').onSnapshot((snapshot)=>{
+   var count=0;
+    snapshot.forEach(doc=>{
+        const data=doc.data();
+        if(data.isactive){
+            count++
+        }
+    })
+    activevolunteer.innerText=count;
+})
+
 </script>
 </html>
