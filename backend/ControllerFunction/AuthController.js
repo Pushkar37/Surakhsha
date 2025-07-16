@@ -5,7 +5,7 @@ const AuthController=(req,res,next)=>{
         const{token}=req.cookies;
         if(!token){
          
-            return res.redirect("http://localhost:1000/user/login")
+            return res.redirect("/user/login")
          
         }
         const DecodeToken=jwt.verify(token,process.env.JWT_SECRET);
@@ -15,7 +15,7 @@ const AuthController=(req,res,next)=>{
         }
         else{
              
-            res.redirect("http:/localhost:1000/user/login")
+            res.redirect("/user/login")
            
         }
     } catch (error) {
