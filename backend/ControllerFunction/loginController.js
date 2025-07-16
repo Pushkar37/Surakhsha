@@ -30,7 +30,7 @@ const loginController=async(req,res)=>{
          res.redirect("/user/login")
         }else{
         
-        const check=bcrypt.compare(password,admin.password);
+        const check= await bcrypt.compare(password,admin.password);
         if(!check){
             
             res.redirect("/user/login")
