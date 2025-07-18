@@ -35,7 +35,7 @@
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center">
-    <div class="min:p-4 md:p-6 lg:p-8  min-h-screen  ">
+    <div class="min:p-4 p-6 md:p-6 lg:p-8  min-h-screen  ">
 
         <div class=" max-w-7xl    ">
             <div class="mb-10">
@@ -176,7 +176,7 @@
                         <img src="../views/assets/cross_icon.svg" alt="n">
                     </div>
             </div>
-            <div class="flex items-center gap-3 mt-4 flex-wrap md:flex-nowrap ">
+            <div class="flex items-center gap-3 mt-4 flex-wrap md:justify-center md:flex-nowrap ">
                 <div id="Activesos" class=" cursor-pointer  text-sm font-semibold border-1 w-[40%] border-white  shadow-lg rounded-lg bg-gray-50    p-2  md:w-70 h-20 flex  items-center ">
                   <div class="p-1.5 bg-red-100 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-triangle" class="lucide lucide-alert-triangle h-4 w-4 md:h-5 md:w-5 text-red-600"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
@@ -222,7 +222,7 @@
     </form>
     <div class=" rounded-lg border-2 bg-gray-50 px-4 py-4 border-white shadow-lg">
            <h2 class="text-2xl font-md mb-2">Live Safety Map</h2>
-           <div class=" relative left-250 top-18 z-1000 w-[10%] bg-white/60 p-4 rounded-lg flex flex-col text-center font-semibold"> 
+           <div class=" relative left-0 top-18 md:left-250 sm:top-18 z-1000 w-[10%] bg-white/60 p-4 rounded-lg flex flex-col text-center font-semibold"> 
             <p class="text-sm mb-2">Legend</p>
             <ul class="text-xs">
                 <li class="flex">
@@ -304,6 +304,9 @@
       measurementId: "G-BBPNLVL4PM"
     };
 var sosmarkers = new L.markerClusterGroup( {showCoverageOnHover: false,
+  maxClusterRadius: 50,
+  spiderfyOnMaxZoom: true,});
+var volunteermarkers = new L.markerClusterGroup( {showCoverageOnHover: false,
   maxClusterRadius: 50,
   spiderfyOnMaxZoom: true,});
 
@@ -393,22 +396,27 @@ db.collection('reports').onSnapshot((snapshot)=>{
 
 
 
-//var count=0;
-//db.collection('volunteers').onSnapshot((snapshot)=>{
-   // Volunteer=[];
-  //  snapshot.forEach(doc=>{
-  //      const data=doc.data();
-  //      console.log(data)
-    //     Volunteer[data.id]=L.marker([data.location._latitude,data.location._longitude],{icon:VolunteerIcon}).addTo(map).bindPopup(data.name);
-   //      L.DomUtil.addClass(Volunteer[data.id]._icon, 'blinking');
-   //      if(count>0){
-   //         Volunteer[data.id].remove();
-   //      }
-   // })
-   //      count++;
-      
-//})
- 
+var count=0;
+db.collection('volunteers').onSnapshot((snapshot)=>{
+    Volunteer=[];
+    snapshot.forEach(doc=>{
+        const data=doc.data();
+        console.log(data)
+        if(data.location!=undefined){
+
+            Volunteer[data.id]=L.marker([data.location._lat,data.location._long],{icon:VolunteerIcon}).bindPopup(data.name);
+           // L.DomUtil.addClass(Volunteer[data.id]._icon, 'blinking');
+           volunteermarkers.addLayer(Volunteer[data.id])
+           map.addLayer(volunteermarkers)
+            if(count>0){
+                Volunteer[data.id].remove();
+            }
+        }
+        })
+        count++;
+        
+    })
+    
  
 
 var sos=document.getElementById("sos");
